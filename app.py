@@ -1,30 +1,19 @@
 import os
 
 from textual import events
-
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.widgets import Markdown
-
+from textual.app import App
 from textual.widgets import Header, Footer
+from utils import generate_slide
+
 
 directory: str = "slides"
 
-def generate_slide(file: str):
-    content = ""
-    with open(f"{directory}/{file}") as f:
-        content = f.read()
-
-    class Slide(Screen):
-        def compose(self) -> ComposeResult:
-            yield Markdown(content)
-
-    return Slide
-
 
 class HeyIMadeThisWithPython(App):
-    slide_number = 0
+    screen_title = 'Prezi'
+    CSS_PATH = "styles/prezi.tcss"
     SCREENS = {}
+    slide_number = 0
 
     for file in os.listdir(directory):
         slide = generate_slide(file)
@@ -34,14 +23,22 @@ class HeyIMadeThisWithPython(App):
         screen_list = list(self.SCREENS.keys())
 
         try:
+            if event.key == "right" and self.slide_number < len(self.SCREENS.keys()):
+                self.slide_number += 1
+            elif event.key == "left" and self.slide_number > 0:
+                self.slide_number -= 1
+            else:
+                # Do nothing
+                pass
+
             screen = screen_list[self.slide_number]
             self.push_screen(screen)
-            self.slide_number += 1
+
         except Exception:
             pass
 
     def compose(self):
-        yield Header()
+        yield Header(name="Prezi")
         yield Footer()
 
 

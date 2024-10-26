@@ -1,0 +1,12 @@
+Markdown h1 {
+    color: blue;
+    text-align: center;
+    margin-bottom: 2;
+}
+
+Markdown h2 {
+    color: green;
+    font-style: italic;
+    margin-bottom: 1;
+}
+
