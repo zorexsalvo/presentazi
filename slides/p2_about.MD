@@ -1,5 +1,5 @@
 ### About Me
-- I'm from the **Philippines**
-- Part of Python Philippines Core Group
-- I am a runner
-- I am a singer?
+- From the Philippines
+- Core member of Python Philippines
+- Served as chair for PyCon PH 2024
+- Runner and "singer?"
