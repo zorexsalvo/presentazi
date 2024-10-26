@@ -7,20 +7,23 @@ from textual.screen import Screen
 from textual.widgets import Static
 
 
-class MyLightningTalk(App):
+def generate_slide(file):
+
+    class Slide(Screen):
+        def compose(self) -> ComposeResult:
+            yield Static(file)
+    return Slide
+
+
+class HeyIMadeThisWithPython(App):
     slide_number = 0
     directory: str = "slides"
-
     SCREENS = {}
-    for file in os.listdir(directory):
 
-        def compose(self) -> ComposeResult:
-            yield Static("T")
-
-        Slide = type(file, (object,), {
-            "compose": compose
-        })
-        SCREENS[file] = Slide
+    # or file in range() os.listdir(directory):
+    for file in range(10):
+        slide = generate_slide(str(file))
+        SCREENS[str(file)] = slide
 
     def on_key(self, event: events.Key) -> None:
         screen_list = list(self.SCREENS.keys())
@@ -31,6 +34,6 @@ class MyLightningTalk(App):
 
 
 if __name__ == "__main__":
-    app = MyLightningTalk()
+    app = HeyIMadeThisWithPython()
     app.run()
 
