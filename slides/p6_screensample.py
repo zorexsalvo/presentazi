@@ -23,8 +23,3 @@ class Slide(Screen):
         yield Static("Press any key to continue [blink]_[/]", id="any-key")
 
 
-
-# class MyClass:
-    # def greet(self):
-        # print("Hello from MyClass!")
-
