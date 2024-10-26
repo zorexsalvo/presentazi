@@ -4,7 +4,9 @@ from textual import events
 
 from textual.app import App, ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static
+from textual.widgets import Markdown
+
+from textual.widgets import Header, Footer
 
 directory: str = "slides"
 
@@ -15,7 +17,7 @@ def generate_slide(file: str):
 
     class Slide(Screen):
         def compose(self) -> ComposeResult:
-            yield Static(content)
+            yield Markdown(content)
 
     return Slide
 
@@ -30,10 +32,17 @@ class HeyIMadeThisWithPython(App):
 
     def on_key(self, event: events.Key) -> None:
         screen_list = list(self.SCREENS.keys())
-        screen = screen_list[self.slide_number]
 
-        self.push_screen(screen)
-        self.slide_number += 1
+        try:
+            screen = screen_list[self.slide_number]
+            self.push_screen(screen)
+            self.slide_number += 1
+        except Exception:
+            pass
+
+    def compose(self):
+        yield Header()
+        yield Footer()
 
 
 if __name__ == "__main__":
