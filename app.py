@@ -1,4 +1,5 @@
 import os
+import importlib
 
 from textual import events
 from textual.app import App
@@ -15,7 +16,10 @@ class HeyIMadeThisWithPython(App):
     SCREENS = {}
     slide_number = 0
 
-    for file in os.listdir(directory):
+    for file in sorted(os.listdir(directory)):
+        if file == '__init__.py':
+            continue
+
         slide = generate_slide(file)
         SCREENS[file] = slide
 

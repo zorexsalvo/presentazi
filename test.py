@@ -4,7 +4,7 @@ from PIL import Image
 
 console = Console()
 
-with Image.open("table.jpg") as image:
+with Image.open("python-logo-only.png") as image:
     pixels = Pixels.from_image(image)
 
 console.print(pixels)
