@@ -1,40 +1,34 @@
+import os
+
 from textual import events
 
 from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import Static
 
+
 class MyLightningTalk(App):
+    slide_number = 0
+    directory: str = "slides"
 
-    class Welcome(Screen):
+    SCREENS = {}
+    for file in os.listdir(directory):
+
         def compose(self) -> ComposeResult:
-            yield Static("Good Morning")
+            yield Static("T")
 
-
-    class BSOD(Screen):
-        def compose(self) -> ComposeResult:
-            yield Static("Hello")
-
-
-    for a in [1, 2, 3]:
-        print(a)
-
-    SCREENS = {
-        "welcome": Welcome,
-        "bsod": BSOD,
-    }
-    slide_count = 0
+        Slide = type(file, (object,), {
+            "compose": compose
+        })
+        SCREENS[file] = Slide
 
     def on_key(self, event: events.Key) -> None:
         screen_list = list(self.SCREENS.keys())
-        screen = screen_list[self.slide_count]
+        screen = screen_list[self.slide_number]
 
         self.push_screen(screen)
-        self.slide_count += 1
+        self.slide_number += 1
 
-
-def screen_factory():
-    pass
 
 if __name__ == "__main__":
     app = MyLightningTalk()
