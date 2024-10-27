@@ -2,7 +2,7 @@
 
 - Email: zorexsalvo@gmail.com / zorex@python.ph
 - GitHub: github.com/zorexsalvo
-- Project Link: https://github.com/zorexsalvo/prezi
+- Project Link: https://github.com/zorexsalvo/presentazi
 
 ## Python Philippines
 - https://python.ph
