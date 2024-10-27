@@ -1,0 +1,5 @@
+# Textual
+Textual is a Rapid Application Development framework for Python.
+Build sophisticated user interfaces with a simple Python API. Run your apps in the terminal and a web browser!
+
+https://github.com/Textualize/textual
