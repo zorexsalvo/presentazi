@@ -11,7 +11,7 @@ directory: str = "slides"
 def generate_slide(file: str):
     content = ""
     Slide = None
-    if file.endswith('.MD'):
+    if file.endswith('.MD') or file.endswith('.md'):
         with open(f"{directory}/{file}") as f:
             content = f.read()
 
