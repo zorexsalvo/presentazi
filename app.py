@@ -1,5 +1,4 @@
 import os
-import importlib
 
 from textual import events
 from textual.app import App
@@ -20,7 +19,7 @@ class HeyIMadeThisWithPython(App):
         if file == '__init__.py':
             continue
 
-        if file.split('.')[-1] not in ('py', 'MD'):
+        if file.split('.')[-1] not in ('py', 'MD', 'md'):
             continue
 
         slide = generate_slide(file)
