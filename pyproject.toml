@@ -21,6 +21,7 @@ classifiers = [
 ]
 dependencies = [
     "textual>=0.84",
+    "rich-pixels>=3.0",
 ]
 
 [project.optional-dependencies]

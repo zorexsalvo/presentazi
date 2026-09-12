@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from PIL import Image as PILImage
+
 from termdeck.deck import load_deck, load_slide
 
 SAMPLE = Path(__file__).parent / "termdeck" / "sample"
@@ -48,6 +50,45 @@ def test_navigation():
     asyncio.run(_run())
 
 
+def test_markdown_inline_image(tmp_dir):
+    from termdeck.app import TermDeck
+
+    img_path = tmp_dir / "diagram.png"
+    PILImage.new("RGB", (20, 10), color="blue").save(img_path)
+
+    md = tmp_dir / "slide.md"
+    md.write_text("# Title\n\n![diagram](diagram.png)\n")
+
+    async def _run():
+        app = TermDeck(tmp_dir)
+        async with app.run_test(size=(80, 24)) as pilot:
+            await pilot.pause()
+            image_widget = app.screen.query_one("ImageWidget")
+            renderable = image_widget.render()
+            assert renderable is not None
+
+    import asyncio
+
+    asyncio.run(_run())
+
+
+def test_markdown_without_images(tmp_dir):
+    from termdeck.app import TermDeck
+
+    md = tmp_dir / "slide.md"
+    md.write_text("# Title\n\nSome text.\n")
+
+    async def _run():
+        app = TermDeck(tmp_dir)
+        async with app.run_test(size=(80, 24)) as pilot:
+            await pilot.pause()
+            assert len(list(app.screen.query("ImageWidget").results())) == 0
+
+    import asyncio
+
+    asyncio.run(_run())
+
+
 def main():
     test_load_slide_markdown()
     test_load_deck_sorted()
@@ -56,7 +97,10 @@ def main():
     from tempfile import TemporaryDirectory
 
     with TemporaryDirectory() as tmp:
-        test_load_slide_python(Path(tmp))
+        path = Path(tmp)
+        test_load_slide_python(path)
+        test_markdown_inline_image(path)
+        test_markdown_without_images(path)
 
     print("All tests passed.")
 

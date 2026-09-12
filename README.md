@@ -37,7 +37,13 @@ A deck is a folder of slide files. Files are sorted by name.
 
 - a bullet
 - another bullet
+
+![diagram](diagram.png)
 ```
+
+Image paragraphs (`![alt](path)`) are rendered as images. Relative paths are resolved from the slide file's directory.
+
+Supported formats: `png`, `jpg`, `jpeg`, `gif`, `webp`, `bmp`.
 
 ### Python slides
 

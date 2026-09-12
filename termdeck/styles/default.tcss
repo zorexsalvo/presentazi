@@ -1,3 +1,9 @@
-#markdown {
+#markdown-slide Markdown {
     margin: 0 20;
+}
+
+#markdown-slide ImageWidget {
+    width: 100%;
+    height: auto;
+    content-align: center middle;
 }
